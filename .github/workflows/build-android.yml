@@ -32,4 +32,4 @@ jobs:
       - name: Build application
         run: |
           cd android
-          ./gradlew assembleDebug
+          ./gradlew assembleRelease

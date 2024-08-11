@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "339686875534",
+    "project_id": "contextapi-df291",
+    "storage_bucket": "contextapi-df291.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339686875534:android:0921d2103276b4f58744df",
+        "android_client_info": {
+          "package_name": "com.exp1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU9kjAUtGHYFreYOsD9XWxOXJdgqtdtD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
