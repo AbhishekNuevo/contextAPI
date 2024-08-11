@@ -33,3 +33,11 @@ jobs:
         run: |
           cd android
           ./gradlew assembleRelease
+
+      - name: Upload and Distribute App
+        uses: mastersam07/firebase-app-distribution-action@v0.1
+        with:
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          file: './app/build/outputs/apk/release/app-release.apk'
+          groups: 'Developer'
