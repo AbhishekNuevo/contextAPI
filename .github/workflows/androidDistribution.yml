@@ -2,7 +2,7 @@ name: Distribute App via Firebase
 
 on:
   workflow_run:
-    workflows: ['Android Build']
+    workflows: ['build-android']
     types:
       - completed
 
