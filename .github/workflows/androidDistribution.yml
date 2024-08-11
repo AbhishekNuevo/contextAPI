@@ -1,10 +1,7 @@
 name: Distribute App via Firebase
 
 on:
-  workflow_run:
-    workflows: ['Android CI']
-    types:
-      - completed
+  workflow_dispatch:
 
 jobs:
   firebase_distribution:
