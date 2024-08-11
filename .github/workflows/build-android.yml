@@ -2,7 +2,7 @@ name: Android CI
 
 on:
   push:
-    branches: ['mainLocal']
+    branches: ['feature/pipeLine']
   pull_request:
     branches: ['mainLocal']
 
