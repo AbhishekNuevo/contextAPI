@@ -27,10 +27,9 @@ jobs:
           node-version: '16'
       - name: Run Yarn Install
         run: |
-          cd ./packages/ContextApi/
           yarn install
 
       - name: Build application
         run: |
-          cd ./packages/ContextApi/android
+          cd android
           ./gradlew assembleDebug
