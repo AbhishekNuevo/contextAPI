@@ -10,17 +10,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: List contents of the outputs directory
+      - name: List contents of the android/app directory
         run: |
-          echo "Listing contents of the outputs directory:"
-          ls -R ./app/build/outputs
+          echo "Listing contents of the android/app directory:"
+          ls -R ./android/app
 
-      - name: Check if APK file exists
+      - name: Check if build directory exists inside android/app
         run: |
-          if [ -f ./app/build/outputs/apk/release/app-release.apk ]; then
-            echo "APK file is available."
+          if [ -d ./android/app/build ]; then
+            echo "Build directory exists inside android/app. Listing contents:"
+            ls -R ./android/app/build
           else
-            echo "APK file is NOT available."
+            echo "Build directory does NOT exist inside android/app."
             exit 1
           fi
 
@@ -29,5 +30,5 @@ jobs:
       #   with:
       #     appId: ${{ secrets.FIREBASE_APP_ID }}
       #     token: ${{ secrets.FIREBASE_TOKEN }}
-      #     file: './app/build/outputs/apk/release/app-release.apk'
+      #     file: './android/app/build/outputs/apk/release/app-release.apk'
       #     groups: 'Developer'
