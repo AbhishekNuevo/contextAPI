@@ -49,3 +49,10 @@ jobs:
             echo "Build directory does NOT exist inside android/app."
             exit 1
           fi
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: Developer
+          file: './android/app/build/outputs/apk/release/app-release.apk'
