@@ -10,6 +10,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: List contents of the outputs directory
+        run: |
+          echo "Listing contents of the outputs directory:"
+          ls -R ./app/build/outputs
+
       - name: Check if APK file exists
         run: |
           if [ -f ./app/build/outputs/apk/release/app-release.apk ]; then
@@ -19,10 +24,10 @@ jobs:
             exit 1
           fi
 
-      - name: Upload and Distribute App
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{ secrets.FIREBASE_APP_ID }}
-          token: ${{ secrets.FIREBASE_TOKEN }}
-          file: './app/build/outputs/apk/release/app-release.apk'
-          groups: 'Developer'
+      # - name: Upload and Distribute App
+      #   uses: wzieba/Firebase-Distribution-Github-Action@v1
+      #   with:
+      #     appId: ${{ secrets.FIREBASE_APP_ID }}
+      #     token: ${{ secrets.FIREBASE_TOKEN }}
+      #     file: './app/build/outputs/apk/release/app-release.apk'
+      #     groups: 'Developer'
