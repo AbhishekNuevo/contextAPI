@@ -2,10 +2,10 @@ name: Android CI
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches: ['feature/pipeLine']
-  # pull_request:
-  #   branches: ['mainLocal']
+  push:
+    branches: ['feature/pipeLine']
+  pull_request:
+    branches: ['mainLocal']
 
 jobs:
   build:

@@ -1,3 +1,4 @@
+
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
@@ -69,11 +70,14 @@ def enableProguardInReleaseBuilds = false
  */
 def jscFlavor = 'org.webkit:android-jsc:+'
 
-def getVersionName() {
-      def date = new Date()
-      def formattedDate = date.format('yyyy.MM.dd.HH.mm')
-      return "1.0." + formattedDate // Customize this as needed
-    }
+static def computedVersionSuffix() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd.HH.mm.ss')
+    def versionName = "1.0." + formattedDate // Customize this as needed
+    println "Generated versionName: ${versionName}"
+    return versionName
+}
+
 
 android {
     ndkVersion rootProject.ext.ndkVersion
@@ -86,7 +90,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName getVersionName()
+        versionName computedVersionSuffix()
+        println "Assigned versionName: ${versionName}"
     }
 
     
