@@ -69,6 +69,12 @@ def enableProguardInReleaseBuilds = false
  */
 def jscFlavor = 'org.webkit:android-jsc:+'
 
+def getVersionName() {
+      def date = new Date()
+      def formattedDate = date.format('yyyy.MM.dd.HH.mm')
+      return "1.0." + formattedDate // Customize this as needed
+    }
+
 android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -106,12 +112,10 @@ android {
     }
 }
 
-def getVersionName() {
-      def date = new Date()
-      def formattedDate = date.format('yyyy.MM.dd.HH.mm')
-      return "1.0." + formattedDate // Customize this as needed
-    }
+
+
     
+
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
