@@ -83,11 +83,7 @@ android {
         versionName getVersionName()
     }
 
-    def getVersionName() {
-      def date = new Date()
-      def formattedDate = date.format('yyyy.MM.dd.HH.mm')
-      return "1.0." + formattedDate // Customize this as needed
-    }
+    
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -110,6 +106,12 @@ android {
     }
 }
 
+def getVersionName() {
+      def date = new Date()
+      def formattedDate = date.format('yyyy.MM.dd.HH.mm')
+      return "1.0." + formattedDate // Customize this as needed
+    }
+    
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
