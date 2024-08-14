@@ -12,35 +12,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: set up JDK 17
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v4 # checkout the code
+      - name: set up JDK 17 #just for step name to install JDK 17
+        uses: actions/setup-java@v4 # this will install the JDK as per the below version
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
 
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/wrapper-validation-action@v1 #install the gradle
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3 #install the node version 22
         with:
           node-version: '22'
-      - name: Run Yarn Install
+      - name: Run Yarn Install # yarn install as my project is react native thats why
         run: |
           yarn install
 
-      - name: Build application
+      - name: Build application # build the release apk
         run: |
           cd android
           ./gradlew assembleRelease
 
-      - name: List contents of the android/app directory
+      - name: List contents of the android/app directory # this is not required but i did to check the content folder to make sure apk is created
         run: |
           echo "Listing contents of the android/app directory:"
           ls -R ./android/app
 
-      - name: Check if build directory exists inside android/app
+      - name: Check if build directory exists inside android/app # this is not required but i did to check the content folder to make sure apk is created
         run: |
           if [ -d ./android/app/build ]; then
             echo "Build directory exists inside android/app. Listing contents:"
@@ -49,15 +49,17 @@ jobs:
             echo "Build directory does NOT exist inside android/app."
             exit 1
           fi
-      - name: Get latest commit
+      - name: Get latest commit #this for to get the last commit message as release not as store in vars variable
         id: vars
         run: echo ::set-output name=LATEST_COMMIT_MESSAGE::$(echo $(git log -1 --pretty=format:"%s"))
 
       - name: upload artifact to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        uses: wzieba/Firebase-Distribution-Github-Action@v1 # this will do the magic to upload the build on firebase
         with:
-          appId: ${{secrets.FIREBASE_APP_ID}}
-          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-          groups: Developer
+          appId: ${{secrets.FIREBASE_APP_ID}} #for these key follow the below link
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }} #for these key follow the below link
+          groups: Developer #you will have to create the group on firebase distribution
           file: './android/app/build/outputs/apk/release/app-release.apk'
           releaseNotes: ${{ steps.vars.outputs.LATEST_COMMIT_MESSAGE }}
+#https://github.com/wzieba/Firebase-Distribution-Github-Action
+#https://github.com/wzieba/Firebase-Distribution-Github-Action/wiki/FIREBASE_TOKEN-migration
