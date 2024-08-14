@@ -49,6 +49,10 @@ jobs:
             echo "Build directory does NOT exist inside android/app."
             exit 1
           fi
+      - name: Get latest commit
+        id: vars
+        run: echo ::set-output name=LATEST_COMMIT_MESSAGE::$(echo $(git log -1 --pretty=format:"%s"))
+
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
@@ -56,3 +60,4 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: Developer
           file: './android/app/build/outputs/apk/release/app-release.apk'
+          releaseNotes: ${{ steps.vars.outputs.LATEST_COMMIT_MESSAGE }}
