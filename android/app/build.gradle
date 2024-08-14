@@ -80,7 +80,13 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName getVersionName()
+    }
+
+    def getVersionName() {
+      def date = new Date()
+      def formattedDate = date.format('yyyy.MM.dd.HH.mm')
+      return "1.0." + formattedDate // Customize this as needed
     }
     signingConfigs {
         debug {
