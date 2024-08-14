@@ -1,10 +1,11 @@
 name: Android CI
 
 on:
-  push:
-    branches: ['feature/pipeLine']
-  pull_request:
-    branches: ['mainLocal']
+  workflow_dispatch:
+  # push:
+  #   branches: ['feature/pipeLine']
+  # pull_request:
+  #   branches: ['mainLocal']
 
 jobs:
   build:
@@ -33,3 +34,18 @@ jobs:
         run: |
           cd android
           ./gradlew assembleRelease
+
+      - name: List contents of the android/app directory
+        run: |
+          echo "Listing contents of the android/app directory:"
+          ls -R ./android/app
+
+      - name: Check if build directory exists inside android/app
+        run: |
+          if [ -d ./android/app/build ]; then
+            echo "Build directory exists inside android/app. Listing contents:"
+            ls -R ./android/app/build
+          else
+            echo "Build directory does NOT exist inside android/app."
+            exit 1
+          fi
